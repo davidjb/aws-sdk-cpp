@@ -64,7 +64,8 @@ namespace Aws
     {
         void *rawMemory = Malloc(allocationTag, sizeof(T));
         // http://stackoverflow.com/questions/6783993/placement-new-and-delete
-        T *constructedMemory = new (rawMemory) T(std::forward<ArgTypes>(args)...);
+        T *constructedMemory = new (rawMemory) T(
+            static_cast<const smithy::components::tracing::TraceCountEvent>(std::forward<ArgTypes>(args))...);
         return constructedMemory;
     }
 /*

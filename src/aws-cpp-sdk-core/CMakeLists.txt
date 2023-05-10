@@ -71,6 +71,7 @@ file(GLOB UTILS_RATE_LIMITER_HEADERS "include/aws/core/utils/ratelimiter/*.h")
 file(GLOB UTILS_STREAM_HEADERS "include/aws/core/utils/stream/*.h")
 file(GLOB CJSON_HEADERS "include/aws/core/external/cjson/*.h")
 file(GLOB TINYXML2_HEADERS "include/aws/core/external/tinyxml2/tinyxml2.h")
+file(GLOB SMITHY_HEADERS "include/smithy/*/*.h")
 
 file(GLOB AWS_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 file(GLOB AWS_TINYXML2_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/external/tinyxml2/*.cpp")
@@ -101,6 +102,7 @@ file(GLOB UTILS_MEMORY_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/utils/memory/*
 file(GLOB UTILS_MEMORY_STL_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/utils/memory/stl/*.cpp")
 file(GLOB UTILS_STREAM_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/utils/stream/*.cpp")
 file(GLOB UTILS_CRYPTO_FACTORY_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/utils/crypto/factory/*.cpp")
+file(GLOB SMITHY_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/source/smithy/*/*.cpp")
 
 include(CheckCSourceCompiles)
 include(CheckCXXSourceCompiles)
@@ -248,6 +250,7 @@ file(GLOB AWS_NATIVE_SDK_COMMON_SRC
     ${UTILS_MEMORY_STL_SOURCE}
     ${UTILS_CRYPTO_OPENSSL_SOURCE}
     ${UTILS_CRYPTO_COMMONCRYPTO_SOURCE}
+    ${SMITHY_SOURCE}
 )
 
 file(GLOB AWS_NATIVE_SDK_COMMON_HEADERS
@@ -288,6 +291,7 @@ file(GLOB AWS_NATIVE_SDK_COMMON_HEADERS
   ${UTILS_CRYPTO_BCRYPT_HEADERS}
   ${UTILS_CRYPTO_OPENSSL_HEADERS}
   ${UTILS_CRYPTO_COMMONCRYPTO_HEADERS}
+  ${SMITHY_HEADERS}
 )
 
 # misc platform-specific, not related to features (encryption/http clients)
@@ -399,6 +403,7 @@ if(MSVC)
     source_group("Header Files\\aws\\core\\utils\\ratelimiter" FILES ${UTILS_RATE_LIMITER_HEADERS})
     source_group("Header Files\\aws\\core\\external\\cjson" FILES ${CJSON_HEADERS})
     source_group("Header Files\\aws\\core\\external\\tinyxml2" FILES ${TINYXML2_HEADERS})
+    source_group("Header Files\\smithy" FILES ${SMITHY_HEADERS})
 
     # http client conditional headers
     if(ENABLE_CURL_CLIENT)
@@ -449,6 +454,7 @@ if(MSVC)
     source_group("Source Files\\utils\\logging" FILES ${UTILS_LOGGING_SOURCE})
     source_group("Source Files\\utils\\memory" FILES ${UTILS_MEMORY_SOURCE})
     source_group("Source Files\\utils\\memory\\stl" FILES ${UTILS_MEMORY_STL_SOURCE})
+    source_group("Source Files\\smithy" FILES ${SMITHY_SOURCE})
 
     # http client conditional source
     if(ENABLE_CURL_CLIENT)
@@ -630,6 +636,7 @@ install (FILES ${UTILS_STREAM_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/aws/core
 install (FILES ${UTILS_THREADING_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/aws/core/utils/threading)
 install (FILES ${CJSON_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/aws/core/external/cjson)
 install (FILES ${TINYXML2_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/aws/core/external/tinyxml2)
+install (FILES ${SMITHY_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/smithy)
 
 # android logcat headers
 if(PLATFORM_ANDROID)

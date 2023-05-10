@@ -1,0 +1,18 @@
+/**
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+#pragma once
+
+#include <smithy/Smithy_EXPORTS.h>
+#include <smithy/tracing/TraceEventType.h>
+
+namespace smithy {
+    namespace components {
+        namespace tracing {
+            SMITHY_API struct TraceEventDataBase {
+                TraceEventType eventType = TraceEventType::Unknown;
+            };
+        }
+    }
+}
